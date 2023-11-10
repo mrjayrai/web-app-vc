@@ -1,11 +1,6 @@
 const app = require("express")();
 const server = require("http").createServer(app);
 const cors = require("cors");
-const express = require("express");
-
-
-// const db = require('./db');
-
 
 const io = require("socket.io")(server, {
 	cors: {
@@ -15,16 +10,12 @@ const io = require("socket.io")(server, {
 });
 
 app.use(cors());
-app.use(express.json());
 
 const PORT = process.env.PORT || 5000;
 
 app.get('/', (req, res) => {
 	res.send('Running');
 });
-
-
-
 
 io.on("connection", (socket) => {
 	socket.emit("me", socket.id);
